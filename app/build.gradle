@@ -1,0 +1,105 @@
+apply plugin: 'com.android.application'
+apply plugin: 'kotlin-android'
+apply plugin: 'kotlin-android-extensions'
+apply plugin: 'kotlin-kapt'
+apply plugin: 'androidx.navigation.safeargs.kotlin'
+
+android {
+    compileSdkVersion rootProject.ext.compileSdkVersion
+    buildToolsVersion rootProject.ext.buildToolsVersion
+
+    defaultConfig {
+        applicationId "com.jesusbadenas.oompaloompascrew"
+        minSdkVersion rootProject.ext.minSdkVersion
+        targetSdkVersion rootProject.ext.targetSdkVersion
+        versionCode rootProject.ext.versionCode
+        versionName rootProject.ext.versionName
+
+        testInstrumentationRunner rootProject.ext.testInstrumentationRunner
+    }
+
+    buildTypes {
+        debug {
+            debuggable true
+            minifyEnabled false
+            shrinkResources false
+        }
+        release {
+            debuggable false
+            minifyEnabled true
+            shrinkResources true
+            proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
+        }
+    }
+
+    compileOptions {
+        sourceCompatibility JavaVersion.VERSION_1_8
+        targetCompatibility JavaVersion.VERSION_1_8
+    }
+
+    kotlinOptions {
+        jvmTarget = JavaVersion.VERSION_1_8.toString()
+    }
+
+    dataBinding {
+        enabled = true
+    }
+
+    lintOptions {
+        warning 'InvalidPackage'
+    }
+
+    packagingOptions {
+        exclude 'META-INF/ASL2.0'
+        exclude 'META-INF/AL2.0'
+        exclude 'META-INF/LGPL2.1'
+    }
+
+    testOptions {
+        unitTests {
+            includeAndroidResources = true
+        }
+    }
+}
+
+dependencies {
+    implementation fileTree(dir: "libs", include: ["*.jar"])
+
+    implementation rootProject.ext.androidAppCompat
+    implementation rootProject.ext.androidConstraintLayout
+    implementation rootProject.ext.androidCoreKtx
+    implementation rootProject.ext.androidMaterial
+    implementation rootProject.ext.androidRecyclerView
+    implementation rootProject.ext.archCoreCommon
+    implementation rootProject.ext.coil
+    implementation rootProject.ext.coroutinesAndroid
+    implementation rootProject.ext.coroutinesCore
+    implementation rootProject.ext.design
+    implementation rootProject.ext.designSupport
+    implementation rootProject.ext.fragment
+    implementation rootProject.ext.koinAndroid
+    implementation rootProject.ext.koinFragment
+    implementation rootProject.ext.koinViewModel
+    implementation rootProject.ext.kotlin
+    implementation rootProject.ext.lifeCycleExtensions
+    implementation rootProject.ext.lifeCycleLiveDataKtx
+    implementation rootProject.ext.lifeCycleViewModelKtx
+    implementation rootProject.ext.loggingInterceptor
+    implementation rootProject.ext.navigationFeature
+    implementation rootProject.ext.navigationFragment
+    implementation rootProject.ext.navigationUi
+    implementation rootProject.ext.retrofit
+    implementation rootProject.ext.retrofitConverterGson
+
+    kapt rootProject.ext.dataBindingCompiler
+    kapt rootProject.ext.lifeCycleCompiler
+
+    compileOnly rootProject.ext.jsr250
+
+    testImplementation rootProject.ext.androidXTestCore
+    testImplementation rootProject.ext.archCoreTesting
+    testImplementation rootProject.ext.coroutinesTest
+    testImplementation rootProject.ext.jUnit
+    testImplementation rootProject.ext.koinTest
+    testImplementation rootProject.ext.mockk
+}
