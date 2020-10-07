@@ -13,7 +13,7 @@ fun ImageView.setImageUrl(url: String?) {
         crossfade(true)
         diskCachePolicy(CachePolicy.ENABLED)
         memoryCachePolicy(CachePolicy.ENABLED)
-        placeholder(R.drawable.ic_launcher_background)
+        placeholder(R.drawable.ic_launcher_foreground)
     }
 }
 

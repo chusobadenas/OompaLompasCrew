@@ -10,13 +10,15 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import com.jesusbadenas.oompaloompascrew.R
 import com.jesusbadenas.oompaloompascrew.data.entities.OompaLoompa
 import com.jesusbadenas.oompaloompascrew.databinding.ListFragmentBinding
+import com.jesusbadenas.oompaloompascrew.navigation.Navigator
 import com.jesusbadenas.oompaloompascrew.viewmodel.ListViewModel
 import kotlinx.android.synthetic.main.list_fragment.*
 import org.koin.android.ext.android.inject
 import org.koin.androidx.viewmodel.ext.android.viewModel
 
-class ListFragment : Fragment() {
+class ListFragment : Fragment(), OLAdapter.OnItemClickListener {
 
+    private val navigator: Navigator by inject()
     private val olAdapter: OLAdapter by inject()
     private val viewModel: ListViewModel by viewModel()
 
@@ -45,6 +47,7 @@ class ListFragment : Fragment() {
     }
 
     private fun setupRV() {
+        olAdapter.onItemClickListener = this
         list_rv.apply {
             setHasFixedSize(true)
             layoutManager = LinearLayoutManager(context)
@@ -68,5 +71,9 @@ class ListFragment : Fragment() {
             swipe_container.isRefreshing = false
         }
         olAdapter.submitList(list)
+    }
+
+    override fun onItemClicked(id: Int) {
+        navigator.navigateToDetail(this, id)
     }
 }

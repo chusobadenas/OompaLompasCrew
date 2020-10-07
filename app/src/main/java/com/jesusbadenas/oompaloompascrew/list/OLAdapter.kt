@@ -12,6 +12,12 @@ import com.jesusbadenas.oompaloompascrew.databinding.ItemOlBinding
 
 class OLAdapter : ListAdapter<OompaLoompa, OLAdapter.OLViewHolder>(OLDiffCallback()) {
 
+    interface OnItemClickListener {
+        fun onItemClicked(id: Int)
+    }
+
+    var onItemClickListener: OnItemClickListener? = null
+
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): OLViewHolder {
         val binding = DataBindingUtil.inflate<ItemOlBinding>(
             LayoutInflater.from(parent.context),
@@ -25,6 +31,9 @@ class OLAdapter : ListAdapter<OompaLoompa, OLAdapter.OLViewHolder>(OLDiffCallbac
     override fun onBindViewHolder(holder: OLViewHolder, position: Int) {
         val ol: OompaLoompa = getItem(position)
         holder.bind(ol)
+        holder.itemView.setOnClickListener {
+            onItemClickListener?.onItemClicked(ol.id)
+        }
     }
 
     class OLViewHolder(private val binding: ItemOlBinding) :

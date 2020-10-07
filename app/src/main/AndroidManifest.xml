@@ -23,8 +23,10 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+
         <activity
             android:name=".list.ListActivity"
-            android:label="@string/list_activity_label" />
+            android:label="@string/list_label"
+            android:theme="@style/AppTheme.NoActionBar" />
     </application>
 </manifest>
