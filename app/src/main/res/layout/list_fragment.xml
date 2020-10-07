@@ -5,7 +5,7 @@
 
         <variable
             name="viewModel"
-            type="com.jesusbadenas.oompaloompascrew.viewmodel.MainViewModel" />
+            type="com.jesusbadenas.oompaloompascrew.viewmodel.ListViewModel" />
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout
