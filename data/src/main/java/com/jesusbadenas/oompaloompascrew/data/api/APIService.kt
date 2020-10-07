@@ -1,7 +1,7 @@
 package com.jesusbadenas.oompaloompascrew.data.api
 
-import com.jesusbadenas.oompaloompascrew.data.entities.OompaLoompaData
-import com.jesusbadenas.oompaloompascrew.data.entities.OompaLoompasResponse
+import com.jesusbadenas.oompaloompascrew.data.entities.response.OompaLoompaData
+import com.jesusbadenas.oompaloompascrew.data.entities.response.OompaLoompasResponse
 import retrofit2.http.GET
 import retrofit2.http.Path
 import retrofit2.http.Query

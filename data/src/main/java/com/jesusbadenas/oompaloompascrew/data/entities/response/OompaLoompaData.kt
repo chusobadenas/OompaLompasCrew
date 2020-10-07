@@ -1,4 +1,4 @@
-package com.jesusbadenas.oompaloompascrew.data.entities
+package com.jesusbadenas.oompaloompascrew.data.entities.response
 
 import com.google.gson.annotations.SerializedName
 
