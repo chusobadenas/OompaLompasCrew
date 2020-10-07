@@ -2,4 +2,6 @@
 <resources>
     <string name="app_name">Oompa Loompa\'s Crew</string>
     <string name="list_activity_label">Browse Oompa Loompa\'s</string>
+    <string name="ol_description">Oompa Loompa</string>
+    <string name="ol_full_name">%1$s %2$s</string>
 </resources>

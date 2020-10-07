@@ -22,6 +22,7 @@ class SplashActivity : AppCompatActivity() {
         Timer().schedule(object : TimerTask() {
             override fun run() {
                 navigator.navigateToList(this@SplashActivity)
+                finish()
             }
         }, SPLASH_DURATION)
     }
