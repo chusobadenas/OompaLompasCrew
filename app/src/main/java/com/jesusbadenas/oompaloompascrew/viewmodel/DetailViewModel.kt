@@ -3,21 +3,24 @@ package com.jesusbadenas.oompaloompascrew.viewmodel
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.jesusbadenas.oompaloompascrew.data.entities.OompaLoompa
+import com.jesusbadenas.oompaloompascrew.data.entities.OompaLoompaDetail
 import com.jesusbadenas.oompaloompascrew.domain.repositories.OompaLoompaRepository
 import kotlinx.coroutines.launch
 
-class ListViewModel(private val repository: OompaLoompaRepository) : ViewModel() {
+class DetailViewModel(
+    private val id: Int,
+    private val repository: OompaLoompaRepository
+) : ViewModel() {
 
-    val list = MutableLiveData<List<OompaLoompa>>()
+    val olDetail = MutableLiveData<OompaLoompaDetail>()
 
     init {
-        loadOLList()
+        loadOLDetail()
     }
 
-    fun loadOLList() {
+    fun loadOLDetail() {
         viewModelScope.launch {
-            list.value = repository.getOompaLoompas(1)
+            olDetail.value = repository.getOompaLoompaById(id)
         }
     }
 }

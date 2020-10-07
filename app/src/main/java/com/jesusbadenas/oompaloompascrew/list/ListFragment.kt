@@ -56,17 +56,17 @@ class ListFragment : Fragment(), OLAdapter.OnItemClickListener {
 
         swipe_container.setColorSchemeResources(R.color.colorPrimary)
         swipe_container.setOnRefreshListener {
-            viewModel.loadOlList()
+            viewModel.loadOLList()
         }
     }
 
     private fun subscribe() {
         viewModel.list.observe(viewLifecycleOwner) { list ->
-            loadOlList(list)
+            loadOLList(list)
         }
     }
 
-    private fun loadOlList(list: List<OompaLoompa>) {
+    private fun loadOLList(list: List<OompaLoompa>) {
         if (swipe_container.isRefreshing) {
             swipe_container.isRefreshing = false
         }

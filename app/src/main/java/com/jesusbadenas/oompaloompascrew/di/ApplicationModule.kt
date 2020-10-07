@@ -4,6 +4,7 @@ import com.jesusbadenas.oompaloompascrew.detail.DetailFragment
 import com.jesusbadenas.oompaloompascrew.list.ListFragment
 import com.jesusbadenas.oompaloompascrew.list.OLAdapter
 import com.jesusbadenas.oompaloompascrew.navigation.Navigator
+import com.jesusbadenas.oompaloompascrew.viewmodel.DetailViewModel
 import com.jesusbadenas.oompaloompascrew.viewmodel.ListViewModel
 import org.koin.androidx.fragment.dsl.fragment
 import org.koin.androidx.viewmodel.dsl.viewModel
@@ -14,5 +15,6 @@ val appModule = module {
     fragment { ListFragment() }
     factory { OLAdapter() }
     single { Navigator() }
+    viewModel { (id: Int) -> DetailViewModel(id, get()) }
     viewModel { ListViewModel(get()) }
 }
