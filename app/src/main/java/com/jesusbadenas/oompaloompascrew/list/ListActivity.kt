@@ -8,6 +8,6 @@ class ListActivity : AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.list_activity)
+        setContentView(R.layout.layout_activity)
     }
 }
