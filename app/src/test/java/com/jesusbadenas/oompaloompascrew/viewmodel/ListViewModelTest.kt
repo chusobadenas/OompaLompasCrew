@@ -1,6 +1,7 @@
 package com.jesusbadenas.oompaloompascrew.viewmodel
 
 import androidx.arch.core.executor.testing.InstantTaskExecutorRule
+import com.jesusbadenas.oompaloompascrew.R
 import com.jesusbadenas.oompaloompascrew.data.entities.OompaLoompa
 import com.jesusbadenas.oompaloompascrew.domain.repositories.OompaLoompaRepository
 import com.jesusbadenas.oompaloompascrew.test.CoroutinesTestRule
@@ -39,14 +40,13 @@ class ListViewModelTest {
     @Before
     fun setUp() {
         MockKAnnotations.init(this)
-        coEvery { repository.getOompaLoompas(1) } returns listOf(oompaLoompa)
-        coEvery { repository.getOompaLoompas(2) } returns listOf(oompaLoompa.copy(id = 2))
     }
 
     @Test
     fun testLoadFirstPageSuccess() = coroutineRule.runBlockingTest {
-        val viewModel = ListViewModel(repository)
+        coEvery { repository.getOompaLoompas(1) } returns listOf(oompaLoompa)
 
+        val viewModel = ListViewModel(repository)
         val result = viewModel.list.getOrAwaitValue()
 
         Assert.assertNotNull(result)
@@ -57,8 +57,10 @@ class ListViewModelTest {
 
     @Test
     fun testLoadSecondPageSuccess() = coroutineRule.runBlockingTest {
-        val viewModel = ListViewModel(repository)
+        coEvery { repository.getOompaLoompas(1) } returns listOf(oompaLoompa)
+        coEvery { repository.getOompaLoompas(2) } returns listOf(oompaLoompa.copy(id = 2))
 
+        val viewModel = ListViewModel(repository)
         viewModel.loadMoreItems()
         val result = viewModel.list.getOrAwaitValue()
 
@@ -67,5 +69,17 @@ class ListViewModelTest {
         Assert.assertEquals(1, result[0].id)
         Assert.assertEquals(2, result[1].id)
         Assert.assertFalse(viewModel.isLoading)
+    }
+
+    @Test
+    fun testLoadThrowsException() = coroutineRule.runBlockingTest {
+        val exception = Exception()
+        coEvery { repository.getOompaLoompas(1) } throws exception
+
+        val viewModel = ListViewModel(repository)
+        val error = viewModel.uiError.getOrAwaitValue()
+
+        Assert.assertEquals(exception, error.throwable)
+        Assert.assertEquals(R.string.generic_error_message, error.messageResId)
     }
 }

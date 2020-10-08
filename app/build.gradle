@@ -93,6 +93,7 @@ dependencies {
     implementation rootProject.ext.navigationUi
     implementation rootProject.ext.retrofit
     implementation rootProject.ext.retrofitConverterGson
+    implementation rootProject.ext.timber
 
     kapt rootProject.ext.dataBindingCompiler
     kapt rootProject.ext.lifeCycleCompiler

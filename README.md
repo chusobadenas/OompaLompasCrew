@@ -13,5 +13,6 @@ Napptilus Tech Lab code challenge.
 - [Koin](https://insert-koin.io)
 - [OkHttp](https://square.github.io/okhttp)
 - [Retrofit](https://square.github.io/retrofit)
+- [Timber](https://github.com/JakeWharton/timber)
 
 - [MockK](https://mockk.io/)

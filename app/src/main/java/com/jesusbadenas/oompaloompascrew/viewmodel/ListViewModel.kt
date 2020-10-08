@@ -1,14 +1,12 @@
 package com.jesusbadenas.oompaloompascrew.viewmodel
 
 import androidx.lifecycle.MutableLiveData
-import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.jesusbadenas.oompaloompascrew.data.entities.OompaLoompa
 import com.jesusbadenas.oompaloompascrew.domain.repositories.OompaLoompaRepository
 import com.jesusbadenas.oompaloompascrew.util.addMoreItems
-import kotlinx.coroutines.launch
 
-class ListViewModel(private val repository: OompaLoompaRepository) : ViewModel() {
+class ListViewModel(private val repository: OompaLoompaRepository) : BaseViewModel() {
 
     private var currentPage = FIRST_PAGE
     var isLoading = false
@@ -20,7 +18,7 @@ class ListViewModel(private val repository: OompaLoompaRepository) : ViewModel()
 
     private fun loadCurrentPage() {
         isLoading = true
-        viewModelScope.launch {
+        viewModelScope.safeLaunch {
             val result = repository.getOompaLoompas(currentPage)
             list.addMoreItems(result)
             isLoading = false

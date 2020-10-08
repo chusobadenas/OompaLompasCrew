@@ -24,13 +24,15 @@ private const val CACHE_SIZE_MB: Long = 5 * 1024 * 1024
 private const val DATE_FORMAT = "yyyy-MM-dd'T'HH:mm:ss'Z'"
 
 val dataModule = module {
-    factory(StringQualifier(CACHE_INTERCEPTOR)) { provideCacheInterceptor(androidContext()) }
-    factory {
-        HttpLoggingInterceptor().apply {
-            level = HttpLoggingInterceptor.Level.BASIC
-        }
+    factory(StringQualifier(CACHE_INTERCEPTOR)) {
+        provideCacheInterceptor(androidContext())
     }
-    factory<Gson> { GsonBuilder().setDateFormat(DATE_FORMAT).create() }
+    factory {
+        HttpLoggingInterceptor().apply { level = HttpLoggingInterceptor.Level.BASIC }
+    }
+    factory<Gson> {
+        GsonBuilder().setDateFormat(DATE_FORMAT).create()
+    }
     factory {
         provideOkHttpClient(
             androidContext(),
@@ -48,7 +50,7 @@ private fun provideCacheInterceptor(context: Context): Interceptor =
             if (hasNetwork(context)) {
                 header(CACHE_CONTROL, "public, max-age=$CACHE_MAX_AGE_SEC")
             } else {
-                header(CACHE_CONTROL, "public, only-if-cached, max-stale=$CACHE_MAX_STALE_SEC")
+                header(CACHE_CONTROL, "public, max-stale=$CACHE_MAX_STALE_SEC")
             }
         }.build()
         chain.proceed(request)
@@ -60,14 +62,14 @@ private fun provideOkHttpClient(
     logInterceptor: HttpLoggingInterceptor
 ): OkHttpClient =
     OkHttpClient.Builder().apply {
-        // Enable logging
-        if (BuildConfig.DEBUG) {
-            addInterceptor(logInterceptor)
-        }
         // Enable cache
         val myCache = Cache(context.cacheDir, CACHE_SIZE_MB)
         cache(myCache)
         addInterceptor(cacheInterceptor)
+        // Enable logging
+        if (BuildConfig.DEBUG) {
+            addInterceptor(logInterceptor)
+        }
     }.build()
 
 private fun provideRetrofit(okHttpClient: OkHttpClient, gson: Gson): Retrofit =

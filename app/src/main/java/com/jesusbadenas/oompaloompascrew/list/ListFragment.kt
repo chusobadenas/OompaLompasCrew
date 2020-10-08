@@ -13,6 +13,7 @@ import com.jesusbadenas.oompaloompascrew.R
 import com.jesusbadenas.oompaloompascrew.data.entities.OompaLoompa
 import com.jesusbadenas.oompaloompascrew.databinding.ListFragmentBinding
 import com.jesusbadenas.oompaloompascrew.navigation.Navigator
+import com.jesusbadenas.oompaloompascrew.util.showError
 import com.jesusbadenas.oompaloompascrew.viewmodel.ListViewModel
 import com.jesusbadenas.oompaloompascrew.viewmodel.ListViewModel.Companion.MAX_SIZE
 import com.jesusbadenas.oompaloompascrew.viewmodel.ListViewModel.Companion.PAGE_SIZE
@@ -89,16 +90,24 @@ class ListFragment : Fragment(), OLAdapter.OnItemClickListener {
         }
     }
 
+    private fun stopRefreshing() {
+        if (swipe_container.isRefreshing) {
+            swipe_container.isRefreshing = false
+        }
+    }
+
     private fun subscribe() {
         viewModel.list.observe(viewLifecycleOwner) { list ->
             loadOLList(list)
         }
+        viewModel.uiError.observe(viewLifecycleOwner) { uiError ->
+            stopRefreshing()
+            showError(uiError)
+        }
     }
 
     private fun loadOLList(list: List<OompaLoompa>) {
-        if (swipe_container.isRefreshing) {
-            swipe_container.isRefreshing = false
-        }
+        stopRefreshing()
         val newList = mutableListOf<OompaLoompa>().apply { addAll(list) }
         olAdapter.submitList(newList)
     }
