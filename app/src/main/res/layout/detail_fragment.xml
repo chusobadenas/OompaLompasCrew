@@ -1,14 +1,44 @@
 <?xml version="1.0" encoding="utf-8"?>
-<layout xmlns:android="http://schemas.android.com/apk/res/android">
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:bind="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
 
     <data>
 
         <variable
-            name="viewModel"
-            type="com.jesusbadenas.oompaloompascrew.viewmodel.DetailViewModel" />
+            name="olDetail"
+            type="com.jesusbadenas.oompaloompascrew.data.entities.OompaLoompaDetail" />
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent" />
+        android:layout_height="match_parent">
+
+        <ImageView
+            android:id="@+id/iv_cover"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:contentDescription="@string/ol_description"
+            app:layout_constraintDimensionRatio="H,16:9"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            bind:imageUrl="@{olDetail.image}"
+            tools:src="@drawable/ic_launcher_foreground" />
+
+        <TextView
+            android:id="@+id/tv_fullName"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:freezesText="true"
+            android:gravity="center"
+            android:padding="10dp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/iv_cover"
+            bind:firstName="@{olDetail.firstName}"
+            bind:lastName="@{olDetail.lastName}"
+            tools:text="John Doe" />
+    </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>

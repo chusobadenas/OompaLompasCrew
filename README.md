@@ -9,7 +9,7 @@ Napptilus Tech Lab code challenge.
 - [LiveData](https://developer.android.com/topic/libraries/architecture/livedata)
 - [Navigation Component](https://developer.android.com/guide/navigation/navigation-getting-started)
 
-- [Coil](https://github.com/coil-kt/coil)
+- [Glide](https://github.com/bumptech/glide)
 - [Koin](https://insert-koin.io)
 - [OkHttp](https://square.github.io/okhttp)
 - [Retrofit](https://square.github.io/retrofit)

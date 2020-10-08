@@ -32,9 +32,14 @@ class DetailFragment : Fragment() {
         binding = DataBindingUtil.inflate(inflater, R.layout.detail_fragment, container, false)
         binding.lifecycleOwner = this
 
-        // View model
-        binding.viewModel = viewModel
+        subscribe()
 
         return binding.root
+    }
+
+    private fun subscribe() {
+        viewModel.olDetail.observe(viewLifecycleOwner) { olDetail ->
+            binding.olDetail = olDetail
+        }
     }
 }
