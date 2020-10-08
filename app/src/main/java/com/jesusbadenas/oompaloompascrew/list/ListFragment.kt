@@ -8,6 +8,7 @@ import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
+import androidx.swiperefreshlayout.widget.SwipeRefreshLayout
 import com.jesusbadenas.oompaloompascrew.R
 import com.jesusbadenas.oompaloompascrew.data.entities.OompaLoompa
 import com.jesusbadenas.oompaloompascrew.databinding.ListFragmentBinding
@@ -22,12 +23,12 @@ import org.koin.androidx.viewmodel.ext.android.viewModel
 
 class ListFragment : Fragment(), OLAdapter.OnItemClickListener {
 
-    private val layoutManager: LinearLayoutManager by inject()
     private val navigator: Navigator by inject()
     private val olAdapter: OLAdapter by inject()
     private val viewModel: ListViewModel by viewModel()
 
     private lateinit var binding: ListFragmentBinding
+    private lateinit var layoutManager: LinearLayoutManager
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -41,14 +42,10 @@ class ListFragment : Fragment(), OLAdapter.OnItemClickListener {
         // View model
         binding.viewModel = viewModel
 
+        setupViews(binding.root)
         subscribe()
 
         return binding.root
-    }
-
-    override fun onActivityCreated(savedInstanceState: Bundle?) {
-        super.onActivityCreated(savedInstanceState)
-        setupViews()
     }
 
     private val scrollListener = object : RecyclerView.OnScrollListener() {
@@ -73,19 +70,22 @@ class ListFragment : Fragment(), OLAdapter.OnItemClickListener {
         viewModel.loadMoreItems()
     }
 
-    private fun setupViews() {
+    private fun setupViews(view: View) {
         // Recycler view
+        layoutManager = LinearLayoutManager(context)
         olAdapter.onItemClickListener = this
-        list_rv.apply {
+        view.findViewById<RecyclerView>(R.id.list_rv).apply {
             layoutManager = this@ListFragment.layoutManager
             adapter = olAdapter
             addOnScrollListener(scrollListener)
         }
 
         // Swipe refresh
-        swipe_container.setColorSchemeResources(R.color.colorPrimary)
-        swipe_container.setOnRefreshListener {
-            viewModel.loadFirst()
+        view.findViewById<SwipeRefreshLayout>(R.id.swipe_container).apply {
+            setColorSchemeResources(R.color.colorPrimary)
+            setOnRefreshListener {
+                viewModel.loadFirst()
+            }
         }
     }
 
