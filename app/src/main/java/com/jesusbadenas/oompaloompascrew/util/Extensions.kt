@@ -7,6 +7,11 @@ import com.jesusbadenas.oompaloompascrew.R
 import com.jesusbadenas.oompaloompascrew.entities.UIError
 import timber.log.Timber
 
+fun <T> MutableList<T>.clearAndAdd(items: List<T>) {
+    clear()
+    addAll(items)
+}
+
 fun <T> MutableLiveData<MutableList<T>>.addMoreItems(items: List<T>) {
     val oldValue = value ?: mutableListOf()
     oldValue.addAll(items)

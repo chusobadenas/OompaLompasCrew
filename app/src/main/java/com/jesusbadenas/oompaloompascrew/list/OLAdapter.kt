@@ -2,6 +2,7 @@ package com.jesusbadenas.oompaloompascrew.list
 
 import android.view.LayoutInflater
 import android.view.ViewGroup
+import android.widget.Filterable
 import androidx.databinding.DataBindingUtil
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
@@ -10,12 +11,13 @@ import com.jesusbadenas.oompaloompascrew.R
 import com.jesusbadenas.oompaloompascrew.data.entities.OompaLoompa
 import com.jesusbadenas.oompaloompascrew.databinding.ItemOlBinding
 
-class OLAdapter : ListAdapter<OompaLoompa, OLAdapter.OLViewHolder>(OLDiffCallback()) {
+class OLAdapter : ListAdapter<OompaLoompa, OLAdapter.OLViewHolder>(OLDiffCallback()), Filterable {
 
     interface OnItemClickListener {
         fun onItemClicked(id: Int)
     }
 
+    private val filter = OLFilter(this)
     var onItemClickListener: OnItemClickListener? = null
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): OLViewHolder {
@@ -35,6 +37,10 @@ class OLAdapter : ListAdapter<OompaLoompa, OLAdapter.OLViewHolder>(OLDiffCallbac
             onItemClickListener?.onItemClicked(ol.id)
         }
     }
+
+    override fun getFilter(): OLFilter = filter
+
+    override fun getItemId(position: Int): Long = getItem(position).id.toLong()
 
     class OLViewHolder(private val binding: ItemOlBinding) :
         RecyclerView.ViewHolder(binding.root) {

@@ -4,6 +4,8 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.view.inputmethod.EditorInfo
+import android.widget.EditText
 import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.LinearLayoutManager
@@ -13,6 +15,7 @@ import com.jesusbadenas.oompaloompascrew.R
 import com.jesusbadenas.oompaloompascrew.data.entities.OompaLoompa
 import com.jesusbadenas.oompaloompascrew.databinding.ListFragmentBinding
 import com.jesusbadenas.oompaloompascrew.navigation.Navigator
+import com.jesusbadenas.oompaloompascrew.util.clearAndAdd
 import com.jesusbadenas.oompaloompascrew.util.showError
 import com.jesusbadenas.oompaloompascrew.viewmodel.ListViewModel
 import com.jesusbadenas.oompaloompascrew.viewmodel.ListViewModel.Companion.MAX_SIZE
@@ -20,7 +23,6 @@ import com.jesusbadenas.oompaloompascrew.viewmodel.ListViewModel.Companion.PAGE_
 import kotlinx.android.synthetic.main.list_fragment.*
 import org.koin.android.ext.android.inject
 import org.koin.androidx.viewmodel.ext.android.viewModel
-
 
 class ListFragment : Fragment(), OLAdapter.OnItemClickListener {
 
@@ -30,6 +32,8 @@ class ListFragment : Fragment(), OLAdapter.OnItemClickListener {
 
     private lateinit var binding: ListFragmentBinding
     private lateinit var layoutManager: LinearLayoutManager
+
+    private var currentList = mutableListOf<OompaLoompa>()
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -88,6 +92,21 @@ class ListFragment : Fragment(), OLAdapter.OnItemClickListener {
                 viewModel.loadFirst()
             }
         }
+
+        // Filter
+        view.findViewById<EditText>(R.id.search_et).setOnEditorActionListener { tView, action, _ ->
+            if (action == EditorInfo.IME_ACTION_DONE) {
+                filter(tView.text)
+                true
+            } else {
+                false
+            }
+        }
+    }
+
+    private fun filter(text: CharSequence) {
+        olAdapter.filter.listToFilter.clearAndAdd(currentList)
+        olAdapter.filter.filter(text)
     }
 
     private fun stopRefreshing() {
@@ -108,8 +127,8 @@ class ListFragment : Fragment(), OLAdapter.OnItemClickListener {
 
     private fun loadOLList(list: List<OompaLoompa>) {
         stopRefreshing()
-        val newList = mutableListOf<OompaLoompa>().apply { addAll(list) }
-        olAdapter.submitList(newList)
+        currentList = mutableListOf<OompaLoompa>().apply { addAll(list) }
+        olAdapter.submitList(currentList)
     }
 
     override fun onItemClicked(id: Int) {
