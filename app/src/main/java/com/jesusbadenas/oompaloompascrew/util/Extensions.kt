@@ -1,6 +1,9 @@
 package com.jesusbadenas.oompaloompascrew.util
 
+import android.app.Activity
 import android.app.AlertDialog
+import android.view.View
+import android.view.inputmethod.InputMethodManager
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.MutableLiveData
 import com.jesusbadenas.oompaloompascrew.R
@@ -29,4 +32,10 @@ fun Fragment.showError(uiError: UIError) {
         setNeutralButton(android.R.string.ok, null)
         create()
     }.show()
+}
+
+fun Fragment.hideKeyboard(view: View) {
+    (context?.getSystemService(Activity.INPUT_METHOD_SERVICE) as InputMethodManager).apply {
+        hideSoftInputFromWindow(view.windowToken, 0)
+    }
 }

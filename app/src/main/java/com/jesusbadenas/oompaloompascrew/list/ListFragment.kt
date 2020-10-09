@@ -16,6 +16,7 @@ import com.jesusbadenas.oompaloompascrew.data.entities.OompaLoompa
 import com.jesusbadenas.oompaloompascrew.databinding.ListFragmentBinding
 import com.jesusbadenas.oompaloompascrew.navigation.Navigator
 import com.jesusbadenas.oompaloompascrew.util.clearAndAdd
+import com.jesusbadenas.oompaloompascrew.util.hideKeyboard
 import com.jesusbadenas.oompaloompascrew.util.showError
 import com.jesusbadenas.oompaloompascrew.viewmodel.ListViewModel
 import com.jesusbadenas.oompaloompascrew.viewmodel.ListViewModel.Companion.MAX_SIZE
@@ -97,6 +98,7 @@ class ListFragment : Fragment(), OLAdapter.OnItemClickListener {
         view.findViewById<EditText>(R.id.search_et).setOnEditorActionListener { tView, action, _ ->
             if (action == EditorInfo.IME_ACTION_DONE) {
                 filter(tView.text)
+                hideKeyboard(tView)
                 true
             } else {
                 false

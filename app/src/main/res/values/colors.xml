@@ -5,5 +5,7 @@
     <color name="colorAccent">#009688</color>
     <color name="bg_light_grey">#E9E9E9</color>
     <color name="black_87pc">#DD000000</color>
+    <color name="male">#DEFDFC</color>
+    <color name="female">#FFE3FA</color>
     <color name="white">#FFFFFF</color>
 </resources>

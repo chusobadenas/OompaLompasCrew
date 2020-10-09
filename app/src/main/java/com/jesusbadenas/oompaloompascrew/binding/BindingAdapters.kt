@@ -1,7 +1,9 @@
 package com.jesusbadenas.oompaloompascrew.binding
 
+import android.view.View
 import android.widget.ImageView
 import android.widget.TextView
+import androidx.core.content.ContextCompat
 import androidx.databinding.BindingAdapter
 import com.bumptech.glide.load.engine.DiskCacheStrategy
 import com.bumptech.glide.load.resource.drawable.DrawableTransitionOptions
@@ -18,6 +20,17 @@ fun ImageView.setImageUrl(url: String?) {
         .error(R.drawable.ic_launcher_foreground)
         .transition(DrawableTransitionOptions.withCrossFade())
         .into(this)
+}
+
+@BindingAdapter("genderBackground")
+fun View.setGenderBackground(gender: String?) {
+    setBackgroundColor(
+        when (gender) {
+            "M" -> ContextCompat.getColor(context, R.color.male)
+            "F" -> ContextCompat.getColor(context, R.color.female)
+            else -> ContextCompat.getColor(context, R.color.white)
+        }
+    )
 }
 
 @BindingAdapter("firstName", "lastName")

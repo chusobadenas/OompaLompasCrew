@@ -18,12 +18,16 @@
             android:id="@+id/search_et"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:layout_margin="4dp"
+            android:layout_marginTop="10dp"
+            android:layout_marginBottom="10dp"
             android:autofillHints="string"
             android:hint="@string/search_hint"
             android:imeOptions="actionDone"
             android:inputType="text"
             android:maxLines="1"
+            android:paddingStart="4dp"
+            android:paddingEnd="4dp"
+            android:theme="@style/EditText"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
@@ -41,6 +45,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:clipToPadding="false"
+                android:scrollbarThumbVertical="@drawable/scrollbar_thumb_vertical"
                 android:scrollbars="vertical"
                 tools:listitem="@layout/item_ol" />
         </androidx.swiperefreshlayout.widget.SwipeRefreshLayout>
