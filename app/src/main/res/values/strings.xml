@@ -8,4 +8,11 @@
     <string name="generic_error_title">Oops!</string>
     <string name="generic_error_message">An error has occurred</string>
     <string name="search_hint">Type name…</string>
+    <string name="detail_age">Age: %1$d</string>
+    <string name="detail_country">Country: %1$s</string>
+    <string name="detail_description">Description: %1$s</string>
+    <string name="detail_email">Email: %1$s</string>
+    <string name="detail_gender">Gender: %1$s</string>
+    <string name="detail_height">Height: %1$d</string>
+    <string name="detail_profession">Profession: %1$s</string>
 </resources>

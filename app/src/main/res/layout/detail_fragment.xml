@@ -11,34 +11,101 @@
             type="com.jesusbadenas.oompaloompascrew.data.entities.OompaLoompaDetail" />
     </data>
 
-    <androidx.constraintlayout.widget.ConstraintLayout
+    <ScrollView
         android:layout_width="match_parent"
         android:layout_height="match_parent">
 
-        <ImageView
-            android:id="@+id/iv_cover"
-            android:layout_width="0dp"
-            android:layout_height="0dp"
-            android:contentDescription="@string/ol_description"
-            app:layout_constraintDimensionRatio="H,16:9"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
-            bind:imageUrl="@{olDetail.image}"
-            tools:src="@drawable/ic_launcher_foreground" />
-
-        <TextView
-            android:id="@+id/tv_fullName"
-            android:layout_width="0dp"
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:freezesText="true"
-            android:gravity="center"
-            android:padding="10dp"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/iv_cover"
-            bind:firstName="@{olDetail.firstName}"
-            bind:lastName="@{olDetail.lastName}"
-            tools:text="John Doe" />
-    </androidx.constraintlayout.widget.ConstraintLayout>
+            bind:genderBackground="@{olDetail.gender}">
+
+            <ImageView
+                android:id="@+id/iv_cover"
+                android:layout_width="0dp"
+                android:layout_height="0dp"
+                android:contentDescription="@string/ol_description"
+                app:layout_constraintDimensionRatio="H,16:9"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                bind:imageUrl="@{olDetail.image}"
+                tools:src="@drawable/ic_launcher_foreground" />
+
+            <TextView
+                android:id="@+id/tv_fullName"
+                style="@style/CardTitle"
+                android:layout_marginTop="@dimen/default_margin"
+                android:gravity="center"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/iv_cover"
+                bind:firstName="@{olDetail.firstName}"
+                bind:lastName="@{olDetail.lastName}"
+                tools:text="John Doe" />
+
+            <TextView
+                android:id="@+id/tv_age"
+                style="@style/DetailText"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/tv_fullName"
+                bind:detailAge="@{olDetail.age}" />
+
+            <TextView
+                android:id="@+id/tv_country"
+                style="@style/DetailText"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/tv_age"
+                bind:detailCountry="@{olDetail.country}" />
+
+            <TextView
+                android:id="@+id/tv_description"
+                style="@style/DetailText"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/tv_country"
+                bind:detailDescription="@{olDetail.description}" />
+
+            <TextView
+                android:id="@+id/tv_email"
+                style="@style/DetailText"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/tv_description"
+                bind:detailEmail="@{olDetail.email}" />
+
+            <TextView
+                android:id="@+id/tv_gender"
+                style="@style/DetailText"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/tv_email"
+                bind:detailGender="@{olDetail.gender}" />
+
+            <TextView
+                android:id="@+id/tv_height"
+                style="@style/DetailText"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/tv_gender"
+                bind:detailHeight="@{olDetail.height}" />
+
+            <TextView
+                android:id="@+id/tv_profession"
+                style="@style/DetailText"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/tv_height"
+                bind:detailProfession="@{olDetail.profession}" />
+
+            <Space
+                android:layout_width="0dp"
+                android:layout_height="@dimen/default_margin"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/tv_profession" />
+        </androidx.constraintlayout.widget.ConstraintLayout>
+    </ScrollView>
 </layout>
