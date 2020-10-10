@@ -64,7 +64,7 @@ class OompaLoompaRepositoryTest {
         )
 
         Assert.assertNotNull(result)
-        Assert.assertEquals(1, result.size)
+        Assert.assertEquals(1, result!!.size)
         Assert.assertEquals(expected, result[0])
     }
 

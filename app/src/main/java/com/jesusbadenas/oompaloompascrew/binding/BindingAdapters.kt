@@ -10,6 +10,11 @@ import com.bumptech.glide.load.resource.drawable.DrawableTransitionOptions
 import com.jesusbadenas.oompaloompascrew.R
 import com.jesusbadenas.oompaloompascrew.di.GlideApp
 
+@BindingAdapter("isVisible")
+fun View.setIsVisible(visible: Boolean?) {
+    visibility = visible?.let { if (it) View.VISIBLE else View.GONE } ?: visibility
+}
+
 @BindingAdapter("imageUrl")
 fun ImageView.setImageUrl(url: String?) {
     GlideApp.with(context)

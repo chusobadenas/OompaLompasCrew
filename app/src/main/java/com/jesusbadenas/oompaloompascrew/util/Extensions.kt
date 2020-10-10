@@ -15,9 +15,9 @@ fun <T> MutableList<T>.clearAndAdd(items: List<T>) {
     addAll(items)
 }
 
-fun <T> MutableLiveData<MutableList<T>>.addMoreItems(items: List<T>) {
+fun <T> MutableLiveData<MutableList<T>>.addMoreItems(items: List<T>?) {
     val oldValue = value ?: mutableListOf()
-    oldValue.addAll(items)
+    items?.let { oldValue.addAll(it) }
     value = oldValue
 }
 

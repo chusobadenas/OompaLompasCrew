@@ -10,9 +10,9 @@ import kotlinx.coroutines.withContext
 
 class OompaLoompaRepository(private val apiService: APIService) {
 
-    suspend fun getOompaLoompas(page: Int): List<OompaLoompa> =
+    suspend fun getOompaLoompas(page: Int): List<OompaLoompa>? =
         withContext(Dispatchers.IO) {
-            apiService.getOompaLoompas(page).results.map { ol ->
+            apiService.getOompaLoompas(page).results?.map { ol ->
                 ol.toOompaLoompa()
             }
         }

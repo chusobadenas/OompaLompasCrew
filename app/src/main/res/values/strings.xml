@@ -15,4 +15,5 @@
     <string name="detail_gender">Gender: %1$s</string>
     <string name="detail_height">Height: %1$d</string>
     <string name="detail_profession">Profession: %1$s</string>
+    <string name="empty_list">Sorry, no content found</string>
 </resources>
