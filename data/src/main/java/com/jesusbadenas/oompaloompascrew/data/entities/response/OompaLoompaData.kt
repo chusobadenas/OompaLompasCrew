@@ -1,7 +1,9 @@
 package com.jesusbadenas.oompaloompascrew.data.entities.response
 
+import androidx.annotation.Keep
 import com.google.gson.annotations.SerializedName
 
+@Keep
 data class OompaLoompaData(
     @SerializedName("id") val id: Int,
     @SerializedName("first_name") val firstName: String,
